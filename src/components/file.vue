@@ -30,7 +30,7 @@
         <div class="uploader-file-size">{{formatedSize}}</div>
         <div class="uploader-file-meta"></div>
         <div class="uploader-file-status">
-          <span v-show="status !== 'uploading'">{{status}}</span>
+          <span v-show="status !== 'uploading'">{{statusName}}</span>
           <span v-show="status === 'uploading'">
             <span>{{progressStyle.progress}}</span>
             <em>{{formatedAverageSpeed}}</em>
@@ -137,6 +137,17 @@
         } else {
           return 'waiting'
         }
+      },
+      statusName () {
+        let names = {
+          success: 'Успех',
+          error: 'Ошибка',
+          uploading: 'Загрузка',
+          paused: 'Пауза',
+          waiting: 'Ожидание'
+        }
+
+        return names[this.status]
       },
       formatedTimeRemaining () {
         const timeRemaining = this.timeRemaining
